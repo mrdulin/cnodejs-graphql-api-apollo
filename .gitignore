@@ -3,3 +3,4 @@ credential.js
 dist/
 access.log
 uploads
+.env*

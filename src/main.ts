@@ -1,6 +1,23 @@
 import { createApolloServer } from './server';
+import { Server } from 'http';
 
 (function main() {
   const { app, apolloServer } = createApolloServer();
-  app.listen({ port: 4000 }, () => console.log(`🚀 Server ready at http://localhost:4000${apolloServer.graphqlPath}`));
+  if (app.get('env') !== 'production') {
+    const path = require('path');
+    const dotenvOutput = require('dotenv').config({ env: path.resolve(__dirname, '../.env') });
+    if (dotenvOutput.error) {
+      throw dotenvOutput.error;
+    }
+    console.info('environment variables(configs and secrets):', dotenvOutput.parsed);
+  }
+  const config = require('./config').default;
+  const credentials = require('./credentials').default;
+  app.set('config: ', config);
+  app.set('credentials: ', credentials);
+  console.log('\nconfig: ', config);
+  console.log('\ncredentials: ', credentials);
+  app.listen(config.PORT, () =>
+    console.log(`🚀 Server ready at http://localhost:${config.PORT}${apolloServer.graphqlPath}`),
+  );
 })();
