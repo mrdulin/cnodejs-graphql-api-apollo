@@ -11,6 +11,7 @@ install:
   - yarn install
 before_deploy:
   - ls
+  - yarn run build
 jobs:
   include:
     - stage: Test
