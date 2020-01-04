@@ -9,6 +9,8 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 install:
   - yarn install
+before_deploy:
+  - ls
 jobs:
   include:
     - stage: Test
