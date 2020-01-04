@@ -10,19 +10,19 @@ interface IApolloServerOptions {
   credentials: IAnyObject;
 }
 
-export function createApolloServer({ credentials }: IApolloServerOptions) {
+export function createApolloServer({ credentials, config }: IApolloServerOptions) {
   const app = express();
-  app.use(morgan('dev', { skip: () => process.env.NODE_ENV === 'production' }));
+  app.use(morgan('dev', { skip: () => config.NODE_ENV === 'production' }));
 
   const apolloServer = new ApolloServer({
     schema,
     context: contextFunction,
     dataSources,
     formatError,
-    introspection: process.env.NODE_ENV !== 'production',
-    engine: {
-      apiKey: credentials.ENGINE_API_KEY,
-    },
+    introspection: config.NODE_ENV !== 'production',
+    // engine: {
+    //   apiKey: credentials.ENGINE_API_KEY,
+    // },
   });
   apolloServer.applyMiddleware({ app, cors: true, bodyParserConfig: true });
 

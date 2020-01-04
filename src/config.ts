@@ -4,6 +4,7 @@ const config = {
   GRAPHQL_ENDPOINT: '/graphql',
   GRAPHIQL_ENDPOINT: '/graphiql',
   WS_PATH: '/subscriptions',
+  NODE_ENV: process.env.NODE_ENV || 'development',
 };
 
 export default config;
