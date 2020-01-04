@@ -2,7 +2,7 @@
   "name": "cnodejs-graphql-api-apollo",
   "version": "1.0.0",
   "engines": {
-    "node": ">=10.16.0",
+    "node": ">=10.0.0",
     "npm": ">=6.13.4"
   },
   "description": "GraphQL API for cnodejs.org apollographql version",
