@@ -19,6 +19,7 @@ jobs:
       script: yarn run build
     - stage: Deploy
       script: skip
+      name: 'Deploy To Google App Engine'
       deploy:
         provider: gae
         skip_cleanup: true
