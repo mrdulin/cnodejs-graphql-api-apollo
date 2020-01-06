@@ -20,26 +20,26 @@ export const typeDefs = gql`
     good
   }
 
-  type BaseTopic implements Node {
+  interface BaseTopic {
     id: ID!
     title: String!
     last_reply_at: String!
   }
 
-  type BaseTopicWithAuthor implements Node {
+  type BaseTopicWithAuthor implements BaseTopic {
     id: ID!
+    title: String!
+    last_reply_at: String!
     author: BaseUser!
-    title: String!
-    last_reply_at: String!
   }
 
-  type Topic implements Node {
+  type Topic implements BaseTopic {
     id: ID!
+    title: String!
+    last_reply_at: String!
     author_id: ID!
     tab: Tab!
     content: String!
-    title: String!
-    last_reply_at: String!
     good: Boolean
     top: Boolean
     reply_count: Int
@@ -48,13 +48,13 @@ export const typeDefs = gql`
     author: BaseUser!
   }
 
-  type TopicDetail implements Node {
+  type TopicDetail implements BaseTopic {
     id: ID!
     author_id: ID!
+    last_reply_at: String!
     tab: Tab!
     content: String!
     title: String!
-    last_reply_at: String!
     good: Boolean
     top: Boolean
     reply_count: Int

@@ -10,4 +10,12 @@ export const resolvers: IResolvers = {
       return dataSources.cnodeAPI.validateAccessToken(accesstoken);
     },
   },
+  BaseUserInfo: {
+    __resolveType(user) {
+      if (user.githubUsername) {
+        return 'User';
+      }
+      return 'BaseUser';
+    },
+  },
 };

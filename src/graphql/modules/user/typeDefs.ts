@@ -13,12 +13,17 @@ export const typeDefs = gql`
     avatar_url: String
   }
 
-  type BaseUser {
+  interface BaseUserInfo {
     loginname: String!
     avatar_url: String
   }
 
-  type User {
+  type BaseUser implements BaseUserInfo {
+    loginname: String!
+    avatar_url: String
+  }
+
+  type User implements BaseUserInfo {
     loginname: String!
     avatar_url: String
     githubUsername: String

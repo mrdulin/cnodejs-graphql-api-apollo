@@ -15,4 +15,20 @@ export const resolvers: IResolvers = {
       return parent.author;
     },
   },
+  TopicDetail: {
+    async author(parent, _, __) {
+      return parent.author;
+    },
+  },
+  BaseTopic: {
+    __resolveType(obj, _, __) {
+      if (obj.author_id) {
+        return 'Topic';
+      }
+      if (obj.replies) {
+        return 'TopicDetail';
+      }
+      return null;
+    },
+  },
 };

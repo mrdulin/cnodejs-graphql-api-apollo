@@ -20,7 +20,7 @@ export const typeDefs = gql`
     id: ID!
     type: String
     has_read: Boolean
-    author: BaseUser
+    author: BaseUserInfo
     topic: BaseTopic
     reply: MessageReply
   }

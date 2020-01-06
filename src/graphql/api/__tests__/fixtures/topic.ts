@@ -90,6 +90,7 @@ export const mockGetTopicByIdSuccessResponse = {
         is_uped: false,
       },
     ],
+    is_collect: false,
   },
 };
 
