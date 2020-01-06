@@ -19,7 +19,7 @@ const typeDefs = gql`
 const resolvers = {};
 const schema = makeExecutableSchema({
   typeDefs: [typeDefs, shared.typeDefs, topic.typeDefs, user.typeDefs, message.typeDefs, reply.typeDefs],
-  resolvers: merge(resolvers, topic.resolvers, user.resolvers, message.resolvers),
+  resolvers: merge(resolvers, shared.resolvers, topic.resolvers, user.resolvers, message.resolvers),
 });
 
 export { schema };
