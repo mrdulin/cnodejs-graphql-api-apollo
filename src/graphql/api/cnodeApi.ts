@@ -1,6 +1,8 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
-import { Tab, ITopic, IReply } from '../modules/topic';
+import { Tab, ITopic } from '../modules/topic';
 import { IUser, User, IBaseUser } from '../modules/user';
+import { IMessage } from '../modules/message';
+import { IReply } from '../modules/reply';
 
 interface IGetTopicsParameters {
   page: number;
@@ -17,6 +19,11 @@ interface IResponse<Data> {
 interface IValidateAccessTokenResponse extends IBaseUser {
   success: boolean;
   id: string;
+}
+
+interface IMessagesResponse {
+  has_read_messages: IMessage[];
+  hasnot_read_messages: IMessage[];
 }
 
 export class CnodeAPI extends RESTDataSource {
@@ -48,5 +55,27 @@ export class CnodeAPI extends RESTDataSource {
 
   public async validateAccessToken(accesstoken: string): Promise<IValidateAccessTokenResponse> {
     return this.post(`${this.baseURL}/accesstoken`, { accesstoken });
+  }
+
+  public async getMessageCount(accesstoken: string): Promise<number> {
+    return this.get(`${this.baseURL}/message/count`, { accesstoken }).then((res: { data: number }) => res.data || 0);
+  }
+
+  public async getMessages(accesstoken: string, mdrender: boolean = true): Promise<IMessagesResponse> {
+    return this.get(`${this.baseURL}/messages`, { accesstoken, mdrender }).then((res: IResponse<IMessagesResponse>) => {
+      return res.success ? res.data : { has_read_messages: [], hasnot_read_messages: [] };
+    });
+  }
+
+  public async markAllMessages(accesstoken: string): Promise<Array<{ id: string }>> {
+    return this.post(`${this.baseURL}/message/mark_all`, { accesstoken }).then((res) => {
+      return res.success ? res.marked_msgs : [];
+    });
+  }
+
+  public async markOneMessage(accesstoken: string, msgId: string): Promise<string> {
+    return this.post(`${this.baseURL}/message/mark_one/${msgId}`, { accesstoken }).then((res) => {
+      return res.success ? res.marked_msg_id : '';
+    });
   }
 }

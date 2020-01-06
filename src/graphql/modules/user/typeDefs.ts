@@ -6,10 +6,10 @@ export const typeDefs = gql`
     accesstoken(accesstoken: String!): ValidateAccessTokenResponse
   }
 
-  type ValidateAccessTokenResponse {
+  type ValidateAccessTokenResponse implements Node {
+    id: ID!
     success: Boolean!
     loginname: String
-    id: ID!
     avatar_url: String
   }
 
@@ -24,7 +24,7 @@ export const typeDefs = gql`
     githubUsername: String
     create_at: String
     score: Int
-    recent_topics: [BaseTopic]!
+    recent_topics: [BaseTopicWithAuthor]!
     recent_replies: [BaseReply]!
   }
 `;

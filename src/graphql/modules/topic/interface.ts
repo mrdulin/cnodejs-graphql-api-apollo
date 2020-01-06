@@ -28,20 +28,3 @@ export interface ITopic {
   create_at: string;
   author: IUser;
 }
-
-export interface IBaseReply {
-  id: string;
-  author: IBaseUser;
-  title: string;
-  last_reply_at: string;
-}
-
-export interface IReply {
-  id: string;
-  author: IUser;
-  content: string;
-  ups: string[];
-  create_at: string;
-  reply_id: string;
-  is_uped: boolean;
-}

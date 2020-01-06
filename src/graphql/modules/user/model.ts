@@ -1,6 +1,7 @@
 // tslint:disable: variable-name
 import { IUser } from './interface';
-import { IBaseTopic, IBaseReply } from '../topic';
+import { IBaseTopic } from '../topic';
+import { IBaseReply } from '../reply';
 
 export class User implements IUser {
   public loginname: string = '';

@@ -13,23 +13,6 @@ export const typeDefs = gql`
     mdrender: String
   }
 
-  type Reply {
-    id: ID!
-    author: User!
-    content: String
-    ups: [String]!
-    create_at: String
-    reply_id: ID!
-    is_uped: Boolean
-  }
-
-  type BaseReply {
-    id: ID!
-    author: BaseUser!
-    title: String!
-    last_reply_at: String!
-  }
-
   enum Tab {
     ask
     share
@@ -37,14 +20,20 @@ export const typeDefs = gql`
     good
   }
 
-  type BaseTopic {
+  type BaseTopic implements Node {
+    id: ID!
+    title: String!
+    last_reply_at: String!
+  }
+
+  type BaseTopicWithAuthor implements Node {
     id: ID!
     author: BaseUser!
     title: String!
     last_reply_at: String!
   }
 
-  type Topic {
+  type Topic implements Node {
     id: ID!
     author_id: ID!
     tab: Tab!
