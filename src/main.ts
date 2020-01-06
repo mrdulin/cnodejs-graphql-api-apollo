@@ -1,5 +1,4 @@
 import { createApolloServer } from './server';
-import { Server } from 'http';
 
 (function main() {
   const { app, apolloServer } = createApolloServer();

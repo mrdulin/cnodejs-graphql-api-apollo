@@ -23,11 +23,25 @@ export const typeDefs = gql`
     is_uped: Boolean
   }
 
+  type BaseReply {
+    id: ID!
+    author: BaseUser!
+    title: String!
+    last_reply_at: String!
+  }
+
   enum Tab {
     ask
     share
     job
     good
+  }
+
+  type BaseTopic {
+    id: ID!
+    author: BaseUser!
+    title: String!
+    last_reply_at: String!
   }
 
   type Topic {

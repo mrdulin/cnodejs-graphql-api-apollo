@@ -1,10 +1,17 @@
-import { IUser } from '../user/interface';
+import { IBaseUser, IUser } from '../user/interface';
 
 export enum Tab {
   ASK = 'ask',
   SHARE = 'share',
   JOB = 'job',
   GOOD = 'good',
+}
+
+export interface IBaseTopic {
+  id: string;
+  author: IBaseUser;
+  title: string;
+  last_reply_at: string;
 }
 
 export interface ITopic {
@@ -20,6 +27,13 @@ export interface ITopic {
   visit_count: number;
   create_at: string;
   author: IUser;
+}
+
+export interface IBaseReply {
+  id: string;
+  author: IBaseUser;
+  title: string;
+  last_reply_at: string;
 }
 
 export interface IReply {
