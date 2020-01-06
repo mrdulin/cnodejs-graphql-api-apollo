@@ -1,4 +1,5 @@
-import { IBaseTopic, IBaseReply } from '../topic';
+import { IBaseTopic } from '../topic';
+import { IBaseReply } from '../reply';
 
 export interface IBaseUser {
   loginname: string;

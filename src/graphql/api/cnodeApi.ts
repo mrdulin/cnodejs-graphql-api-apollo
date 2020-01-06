@@ -3,6 +3,7 @@ import { Tab, ITopic } from '../modules/topic';
 import { IUser, User, IBaseUser } from '../modules/user';
 import { IMessage } from '../modules/message';
 import { IReply } from '../modules/reply';
+import _ from 'lodash';
 
 interface IGetTopicsParameters {
   page: number;
@@ -14,11 +15,6 @@ interface IGetTopicsParameters {
 interface IResponse<Data> {
   success: boolean;
   data: Data;
-}
-
-interface IValidateAccessTokenResponse extends IBaseUser {
-  success: boolean;
-  id: string;
 }
 
 interface IMessagesResponse {
@@ -53,12 +49,18 @@ export class CnodeAPI extends RESTDataSource {
     });
   }
 
-  public async validateAccessToken(accesstoken: string): Promise<IValidateAccessTokenResponse> {
-    return this.post(`${this.baseURL}/accesstoken`, { accesstoken });
+  public async validateAccessToken(accesstoken: string): Promise<IBaseUser & { id: string }> {
+    return this.post(`${this.baseURL}/accesstoken`, { accesstoken }).then((res) => {
+      return res.success
+        ? _.omit<IBaseUser & { id: string; success: boolean }, 'success'>(res, ['success'])
+        : { loginname: '', id: '', avatar_url: '' };
+    });
   }
 
   public async getMessageCount(accesstoken: string): Promise<number> {
-    return this.get(`${this.baseURL}/message/count`, { accesstoken }).then((res: { data: number }) => res.data || 0);
+    return this.get(`${this.baseURL}/message/count`, { accesstoken }).then((res: IResponse<number>) => {
+      return res.success ? res.data : 0;
+    });
   }
 
   public async getMessages(accesstoken: string, mdrender: boolean = true): Promise<IMessagesResponse> {

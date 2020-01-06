@@ -7,7 +7,7 @@ export class User implements IUser {
   public loginname: string = '';
   public avatar_url: string = '';
   public githubUsername: string = '';
-  public create_at: string = new Date().toUTCString();
+  public create_at: string = '1900-01-01';
   public score: number = 0;
   public recent_topics: IBaseTopic[] = [];
   public recent_replies: IBaseReply[] = [];
