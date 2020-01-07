@@ -6,10 +6,9 @@ export const typeDefs = gql`
     accesstoken(accesstoken: String!): ValidateAccessTokenResponse
   }
 
-  type ValidateAccessTokenResponse implements Node {
+  type ValidateAccessTokenResponse implements Node & BaseUserInfo {
     id: ID!
-    success: Boolean!
-    loginname: String
+    loginname: String!
     avatar_url: String
   }
 

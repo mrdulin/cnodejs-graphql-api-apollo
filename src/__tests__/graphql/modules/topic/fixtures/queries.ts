@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server';
-import * as F from './fragments';
+import * as F from '../../../fragments';
 
 export const GET_TOPICS = gql`
   query topics($params: GetTopicsParameters) {

@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`user integration test suites Query#accesstoken should return error if validate access token failure 1`] = `
+Object {
+  "data": Object {
+    "accesstoken": null,
+  },
+  "errors": Array [
+    [GraphQLError: some error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`user integration test suites Query#accesstoken should validate access token correctly 1`] = `
+Object {
+  "data": Object {
+    "accesstoken": Object {
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1147375?v=4&s=120",
+      "id": "1",
+      "loginname": "mrdulin",
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`user integration test suites Query#user should get partial user info 1`] = `
+Object {
+  "data": Object {
+    "user": Object {
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1147375?v=4&s=120",
+      "create_at": "2012-09-09T05:26:58.319Z",
+      "githubUsername": "alsotang",
+      "loginname": "alsotang",
+      "score": 15700,
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`user integration test suites Query#user should get user by loginname 1`] = `
+Object {
+  "data": Object {
+    "user": Object {
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1147375?v=4&s=120",
+      "create_at": "2012-09-09T05:26:58.319Z",
+      "githubUsername": "alsotang",
+      "loginname": "alsotang",
+      "recent_replies": Array [
+        Object {
+          "author": Object {
+            "avatar_url": "https://avatars3.githubusercontent.com/u/59083067?v=4&s=120",
+            "loginname": "zhangcheng-RunRun",
+          },
+          "id": "5dfc8d180696c446bf64f5d5",
+          "last_reply_at": "2019-12-25T14:24:01.372Z",
+          "title": "【1封新邀请】5大主题干货满满 ECUG For Future技术盛宴等你参加！",
+        },
+        Object {
+          "author": Object {
+            "avatar_url": "https://avatars3.githubusercontent.com/u/24793336?v=4&s=120",
+            "loginname": "kenghuang",
+          },
+          "id": "5df243e2df1b9a40d14c6504",
+          "last_reply_at": "2019-12-15T03:38:59.776Z",
+          "title": "社区推荐的安卓版客户端为啥不能回复",
+        },
+      ],
+      "recent_topics": Array [
+        Object {
+          "author": Object {
+            "avatar_url": "https://avatars1.githubusercontent.com/u/1147375?v=4&s=120",
+            "loginname": "alsotang",
+          },
+          "id": "5c6d11d033b0b629ac8434ef",
+          "last_reply_at": "2019-05-11T04:22:18.616Z",
+          "title": "【深圳】腾讯云加速产品中心--前端工程师",
+        },
+      ],
+      "score": 15700,
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`user integration test suites Query#user should return an default user if loginname is empty string 1`] = `
+Object {
+  "data": Object {
+    "user": Object {
+      "avatar_url": "",
+      "create_at": "1900-01-01",
+      "githubUsername": "",
+      "loginname": "",
+      "score": 0,
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`user integration test suites Query#user should return errors if get user failure 1`] = `
+Object {
+  "data": Object {
+    "user": null,
+  },
+  "errors": Array [
+    [GraphQLError: some error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`user integration test suites Query#user should throw error if no loginname parameter passed in 1`] = `
+Object {
+  "data": undefined,
+  "errors": Array [
+    [GraphQLError: Variable "$loginname" of required type "String!" was not provided.],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;

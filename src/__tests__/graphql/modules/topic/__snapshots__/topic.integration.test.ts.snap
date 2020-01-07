@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`topic integration test suites #topic should get topic by id correctly 1`] = `
+exports[`topic integration test suites Query#topic should get topic by id correctly 1`] = `
 Object {
   "data": Object {
     "topic": Object {
@@ -82,7 +82,24 @@ Object {
 }
 `;
 
-exports[`topic integration test suites #topics should get topics correctly 1`] = `
+exports[`topic integration test suites Query#topic should return error if get topic by id failure 1`] = `
+Object {
+  "data": Object {
+    "topic": null,
+  },
+  "errors": Array [
+    [GraphQLError: some error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`topic integration test suites Query#topics should get topics correctly 1`] = `
 Object {
   "data": Object {
     "topics": Array [
@@ -221,6 +238,21 @@ A：靠前第一排会给讲师预留座位，观众票座位不对号入座，�
     ],
   },
   "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`topic integration test suites Query#topics should return error if get topics failure 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: some error],
+  ],
   "extensions": undefined,
   "http": Object {
     "headers": Headers {

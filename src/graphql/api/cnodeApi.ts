@@ -44,6 +44,9 @@ export class CnodeAPI extends RESTDataSource {
   }
 
   public async getUser(loginname: string): Promise<IUser> {
+    if (!loginname) {
+      return new User().toObject();
+    }
     return this.get(`${this.baseURL}/user/${loginname}`).then((res: IResponse<IUser>) => {
       return res.success ? res.data : new User().toObject();
     });
