@@ -1,0 +1,7 @@
+runtime: nodejs10
+service: cnodejs-graphql-api-apollo
+
+handlers:
+  - url: /.*
+    secure: always
+    script: auto
