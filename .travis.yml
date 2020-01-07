@@ -20,7 +20,7 @@ jobs:
       deploy:
         provider: gae
         keyfile: .gcp/gae-svc.json
-        project: cnodejs-graphql-api-apollo
+        project: $projectId
 stages:
   - Test
   - Compile
