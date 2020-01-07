@@ -1,4 +1,4 @@
-runtime: nodejs^10.16.0
+runtime: nodejs10
 service: cnodejs-graphql-api-apollo
 env_variables:
   NODE_ENV: production
