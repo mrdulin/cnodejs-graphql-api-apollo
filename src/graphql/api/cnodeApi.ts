@@ -4,6 +4,7 @@ import { IUser, User, IBaseUser } from '../modules/user';
 import { IMessage } from '../modules/message';
 import { IReply } from '../modules/reply';
 import _ from 'lodash';
+import { AuthenticationError } from 'apollo-server';
 
 interface IGetTopicsParameters {
   page: number;
@@ -67,6 +68,9 @@ export class CnodeAPI extends RESTDataSource {
   }
 
   public async getMessages(accesstoken: string, mdrender: boolean = true): Promise<IMessagesResponse> {
+    if (!accesstoken) {
+      throw new AuthenticationError('accesstoken invalid');
+    }
     return this.get(`${this.baseURL}/messages`, { accesstoken, mdrender }).then((res: IResponse<IMessagesResponse>) => {
       return res.success ? res.data : { has_read_messages: [], hasnot_read_messages: [] };
     });

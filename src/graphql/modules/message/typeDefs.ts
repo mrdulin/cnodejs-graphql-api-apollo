@@ -7,7 +7,7 @@ export const typeDefs = gql`
   }
 
   extend type Mutation {
-    markAllMessages(accesstoken: String!): [Node]!
+    markAllMessages(accesstoken: String!): [markAllMessagesResponse]!
     markOneMessage(accesstoken: String!, msgId: ID!): ID!
   }
 
@@ -16,11 +16,15 @@ export const typeDefs = gql`
     hasnot_read_messages: [Message]!
   }
 
+  type markAllMessagesResponse implements Node {
+    id: ID!
+  }
+
   type Message implements Node {
     id: ID!
     type: String
     has_read: Boolean
-    author: BaseUserInfo
+    author: BaseUser
     topic: BaseTopic
     reply: MessageReply
   }

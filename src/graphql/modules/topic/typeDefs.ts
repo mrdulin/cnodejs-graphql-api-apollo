@@ -1,5 +1,19 @@
 import { gql } from 'apollo-server';
 
+const sharedFieldsForTopic = `
+  id: ID!
+  title: String!
+  last_reply_at: String!
+  author_id: ID!
+  tab: Tab!
+  content: String!
+  good: Boolean
+  top: Boolean
+  reply_count: Int
+  visit_count: Int
+  create_at: String
+`;
+
 export const typeDefs = gql`
   extend type Query {
     topics(params: GetTopicsParameters): [Topic]!
@@ -20,46 +34,26 @@ export const typeDefs = gql`
     good
   }
 
-  interface BaseTopic {
+  type BaseTopic implements Node {
     id: ID!
     title: String!
     last_reply_at: String!
   }
 
-  type BaseTopicWithAuthor implements BaseTopic {
+  type BaseTopicWithAuthor implements Node {
     id: ID!
     title: String!
     last_reply_at: String!
     author: BaseUser!
   }
 
-  type Topic implements BaseTopic {
-    id: ID!
-    title: String!
-    last_reply_at: String!
-    author_id: ID!
-    tab: Tab!
-    content: String!
-    good: Boolean
-    top: Boolean
-    reply_count: Int
-    visit_count: Int
-    create_at: String
+  type Topic implements Node {
+    ${sharedFieldsForTopic}
     author: BaseUser!
   }
 
-  type TopicDetail implements BaseTopic {
-    id: ID!
-    author_id: ID!
-    last_reply_at: String!
-    tab: Tab!
-    content: String!
-    title: String!
-    good: Boolean
-    top: Boolean
-    reply_count: Int
-    visit_count: Int
-    create_at: String
+  type TopicDetail implements Node {
+    ${sharedFieldsForTopic}
     author: BaseUser!
     replies: [Reply]!
     is_collect: Boolean

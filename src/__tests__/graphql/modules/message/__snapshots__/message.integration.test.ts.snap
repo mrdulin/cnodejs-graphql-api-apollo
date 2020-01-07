@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`message integration test suites Mutation#markAllMessages should mark all message 1`] = `
+Object {
+  "data": Object {
+    "markAllMessages": Array [
+      Object {
+        "id": "544ce385aeaeb5931556c6f9",
+      },
+    ],
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`message integration test suites Mutation#markAllMessages should return error if mark all message failure 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: some error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`message integration test suites Mutation#markOneMessage should mark one message 1`] = `
+Object {
+  "data": Object {
+    "markOneMessage": "58ec7d39da8344a81eee0c14",
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`message integration test suites Mutation#markOneMessage should return error if mark one message failure 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: some error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`message integration test suites Query#mesasgeCount should get message count 1`] = `
+Object {
+  "data": Object {
+    "messageCount": 3,
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`message integration test suites Query#mesasgeCount should return error if get message count failure 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: some error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`message integration test suites Query#messages should get messages 1`] = `
+Object {
+  "data": Object {
+    "messages": Object {
+      "has_read_messages": Array [],
+      "hasnot_read_messages": Array [
+        Object {
+          "author": Object {
+            "avatar_url": "https://avatars.githubusercontent.com/u/1147375?v=2",
+            "loginname": "alsotang",
+          },
+          "has_read": false,
+          "id": "543fb7abae523bbc80412b26",
+          "reply": Object {
+            "content": "[@alsotang](/user/alsotang) 哈哈",
+            "create_at": "2014-10-16T12:18:51.566Z",
+            "id": "543fb7abae523bbc80412b24",
+            "ups": Array [],
+          },
+          "topic": Object {
+            "id": "542d6ecb9ecb3db94b2b3d0f",
+            "last_reply_at": "2014-10-18T07:47:22.563Z",
+            "title": "adfadfadfasdf",
+          },
+          "type": "at",
+        },
+      ],
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`message integration test suites Query#messages should return accesstoken invalid error if accesstoken is empty string 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: accesstoken invalid],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`message integration test suites Query#messages should return error if get messages failure 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: some error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
