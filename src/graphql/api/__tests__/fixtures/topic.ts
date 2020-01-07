@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const mockGetTopicsSuccessResponse = {
   success: true,
   data: [
@@ -96,4 +98,26 @@ export const mockGetTopicByIdSuccessResponse = {
 
 export const mockGetTopicByIdFailureResponse = {
   success: false,
+};
+
+export const mockCollectTopicSuccessResponse = {
+  success: true,
+};
+
+export const mockCollectTopicFailureResponse = {
+  success: false,
+};
+
+export const mockDeCollectTopicSuccessResponse = {
+  success: true,
+};
+
+export const mockDeCollectTopicFailureResponse = {
+  success: false,
+};
+
+export const mockGetCollectedTopicsSuccessResponse = _.cloneDeep(mockGetTopicsSuccessResponse);
+export const mockGetCollectedTopicsFailureResponse = {
+  success: false,
+  data: [1, 2],
 };

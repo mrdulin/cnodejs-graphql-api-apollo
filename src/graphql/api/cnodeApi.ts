@@ -87,4 +87,18 @@ export class CnodeAPI extends RESTDataSource {
       return res.success ? res.marked_msg_id : '';
     });
   }
+
+  public async collectTopic(accesstoken: string, topicId: string): Promise<{ success: boolean }> {
+    return this.post(`${this.baseURL}/topic_collect/collect`, { accesstoken, topic_id: topicId });
+  }
+
+  public async deCollectTopic(accesstoken: string, topicId: string): Promise<{ success: boolean }> {
+    return this.post(`${this.baseURL}/topic_collect/de_collect`, { accesstoken, topic_id: topicId });
+  }
+
+  public async getCollectedTopics(loginname: string): Promise<ITopic[]> {
+    return this.get(`${this.baseURL}/topic_collect/${loginname}`).then((res: IResponse<ITopic[]>) => {
+      return res.success ? res.data : [];
+    });
+  }
 }

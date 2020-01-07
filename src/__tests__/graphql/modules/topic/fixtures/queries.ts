@@ -4,39 +4,20 @@ import * as F from '../../../fragments';
 export const GET_TOPICS = gql`
   query topics($params: GetTopicsParameters) {
     topics(params: $params) {
-      id
-      author_id
-      tab
-      content
-      title
-      last_reply_at
-      good
-      top
-      reply_count
-      visit_count
-      create_at
+      ...TopicFragment
       author {
         ...AuthorBasicInfo
       }
     }
   }
   ${F.AUTHOR_BASIC_INFO}
+  ${F.TOPIC}
 `;
 
 export const GET_TOPIC_BY_ID = gql`
   query topic($id: ID!) {
     topic(id: $id) {
-      id
-      author_id
-      tab
-      content
-      title
-      last_reply_at
-      good
-      top
-      reply_count
-      visit_count
-      create_at
+      ...TopicDetailFragment
       author {
         ...AuthorBasicInfo
       }
@@ -55,4 +36,18 @@ export const GET_TOPIC_BY_ID = gql`
     }
   }
   ${F.AUTHOR_BASIC_INFO}
+  ${F.TOPIC_DETAIL}
+`;
+
+export const GET_COLLECTED_TOPICS = gql`
+  query topicCollected($loginname: String!) {
+    topicCollected(loginname: $loginname) {
+      ...TopicFragment
+      author {
+        ...AuthorBasicInfo
+      }
+    }
+  }
+  ${F.AUTHOR_BASIC_INFO}
+  ${F.TOPIC}
 `;

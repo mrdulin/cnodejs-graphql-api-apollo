@@ -9,6 +9,9 @@ export const resolvers: IResolvers = {
     async topic(_, { id }, { dataSources }: AppContext) {
       return dataSources.cnodeAPI.getTopicById(id);
     },
+    async topicCollected(_, { loginname }, { dataSources }: AppContext) {
+      return dataSources.cnodeAPI.getCollectedTopics(loginname);
+    },
   },
   Topic: {
     async author(parent, _, __) {

@@ -19,6 +19,12 @@ import {
   mockMarkAllMessagesFailureResponse,
   mockMarkOneMessageSuccessResponse,
   mockMarkOneMessageFailureResponse,
+  mockCollectTopicSuccessResponse,
+  mockCollectTopicFailureResponse,
+  mockDeCollectTopicSuccessResponse,
+  mockDeCollectTopicFailureResponse,
+  mockGetCollectedTopicsSuccessResponse,
+  mockGetCollectedTopicsFailureResponse,
 } from './fixtures';
 
 describe('cnodeApi', () => {
@@ -180,6 +186,64 @@ describe('cnodeApi', () => {
       const actual = await cnodeApi.markOneMessage(/** accesstoken = */ '123', /** msgId = */ '1');
       expect(actual).toBe('');
       expect(cnodeApi['post']).toBeCalledWith('https://cnodejs.org/api/v1/message/mark_one/1', { accesstoken: '123' });
+    });
+  });
+
+  describe('#collectTopic', () => {
+    it('should collect topic', async () => {
+      mocks.post.mockResolvedValueOnce(mockCollectTopicSuccessResponse);
+      const actual = await cnodeApi.collectTopic(/** accesstoken = */ '123', /** topicId = */ '1');
+      expect(actual).toEqual(mockCollectTopicSuccessResponse);
+      expect(cnodeApi['post']).toBeCalledWith('https://cnodejs.org/api/v1/topic_collect/collect', {
+        accesstoken: '123',
+        topic_id: '1',
+      });
+    });
+
+    it('should collect topic failure', async () => {
+      mocks.post.mockResolvedValueOnce(mockCollectTopicFailureResponse);
+      const actual = await cnodeApi.collectTopic(/** accesstoken = */ '123', /** topicId = */ '1');
+      expect(actual).toEqual(mockCollectTopicFailureResponse);
+      expect(cnodeApi['post']).toBeCalledWith('https://cnodejs.org/api/v1/topic_collect/collect', {
+        accesstoken: '123',
+        topic_id: '1',
+      });
+    });
+  });
+
+  describe('#deCollectTopic', () => {
+    it('should cancel collect topic', async () => {
+      mocks.post.mockResolvedValueOnce(mockDeCollectTopicSuccessResponse);
+      const actual = await cnodeApi.deCollectTopic(/** accesstoken = */ '123', /** topicId = */ '1');
+      expect(actual).toEqual(mockDeCollectTopicSuccessResponse);
+      expect(cnodeApi['post']).toBeCalledWith('https://cnodejs.org/api/v1/topic_collect/de_collect', {
+        accesstoken: '123',
+        topic_id: '1',
+      });
+    });
+    it('should cancel collect topic failure', async () => {
+      mocks.post.mockResolvedValueOnce(mockDeCollectTopicFailureResponse);
+      const actual = await cnodeApi.deCollectTopic(/** accesstoken = */ '123', /** topicId = */ '1');
+      expect(actual).toEqual(mockDeCollectTopicFailureResponse);
+      expect(cnodeApi['post']).toBeCalledWith('https://cnodejs.org/api/v1/topic_collect/de_collect', {
+        accesstoken: '123',
+        topic_id: '1',
+      });
+    });
+  });
+
+  describe('#getCollectedTopics', () => {
+    it('should get collected topics', async () => {
+      mocks.get.mockResolvedValueOnce(mockGetCollectedTopicsSuccessResponse);
+      const actual = await cnodeApi.getCollectedTopics(/** loginname = */ 'mrdulin');
+      expect(actual).toEqual(mockGetCollectedTopicsSuccessResponse.data);
+      expect(cnodeApi['get']).toBeCalledWith('https://cnodejs.org/api/v1/topic_collect/mrdulin');
+    });
+    it('should return empty array if get collected topics failure', async () => {
+      mocks.get.mockResolvedValueOnce(mockGetCollectedTopicsFailureResponse);
+      const actual = await cnodeApi.getCollectedTopics(/** loginname = */ 'mrdulin');
+      expect(actual).toEqual([]);
+      expect(cnodeApi['get']).toBeCalledWith('https://cnodejs.org/api/v1/topic_collect/mrdulin');
     });
   });
 });

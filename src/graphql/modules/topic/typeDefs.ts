@@ -18,6 +18,12 @@ export const typeDefs = gql`
   extend type Query {
     topics(params: GetTopicsParameters): [Topic]!
     topic(id: ID!): TopicDetail
+    topicCollected(loginname: String!): [Topic]!
+  }
+
+  extend type Mutation {
+    collectTopic(accesstoken: String!, topicId: ID!): Response!
+    deCollectTopic(accesstoken: String!, topicId: ID!): Response!
   }
 
   input GetTopicsParameters {

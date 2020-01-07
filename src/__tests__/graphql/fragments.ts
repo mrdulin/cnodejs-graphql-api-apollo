@@ -29,3 +29,29 @@ export const MESSAGE = gql`
   }
   ${AUTHOR_BASIC_INFO}
 `;
+
+const sharedFieldsForTopic = `
+  id
+  author_id
+  tab
+  content
+  title
+  last_reply_at
+  good
+  top
+  reply_count
+  visit_count
+  create_at
+`;
+
+export const TOPIC = gql`
+  fragment TopicFragment on Topic {
+    ${sharedFieldsForTopic}
+  }
+`;
+
+export const TOPIC_DETAIL = gql`
+  fragment TopicDetailFragment on TopicDetail {
+    ${sharedFieldsForTopic}
+  }
+`;
