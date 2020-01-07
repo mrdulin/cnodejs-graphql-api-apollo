@@ -15,7 +15,13 @@ jobs:
       script: yarn test
     - stage: Compile
       script: yarn run build
-deploy:
-  provider: gae
-  keyfile: .gcp/gae-svc.json
-  project: cnodejs-graphql-api-apollo
+    - stage: Deploy
+      script: skip
+      deploy:
+        provider: gae
+        keyfile: .gcp/gae-svc.json
+        project: cnodejs-graphql-api-apollo
+stages:
+  - Test
+  - Compile
+  - deploy
