@@ -1,17 +1,16 @@
 import { createApolloServer } from './server';
 
 (function main() {
-  const { app, apolloServer } = createApolloServer();
-  if (app.get('env') !== 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     const path = require('path');
     const dotenvOutput = require('dotenv').config({ env: path.resolve(__dirname, '../.env') });
     if (dotenvOutput.error) {
       throw dotenvOutput.error;
     }
-    console.info('environment variables(configs and secrets):', dotenvOutput.parsed);
   }
   const config = require('./config').default;
   const credentials = require('./credentials').default;
+  const { app, apolloServer } = createApolloServer({ config, credentials });
   app.set('config: ', config);
   app.set('credentials: ', credentials);
   console.log('\nconfig: ', config);

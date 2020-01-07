@@ -3,8 +3,14 @@ import { ApolloServer } from 'apollo-server-express';
 import { contextFunction, dataSources, schema } from './graphql';
 import morgan from 'morgan';
 import { formatError } from './utils';
+import { IAnyObject } from './shared/interface';
 
-export function createApolloServer() {
+interface IApolloServerOptions {
+  config: IAnyObject;
+  credentials: IAnyObject;
+}
+
+export function createApolloServer({ credentials }: IApolloServerOptions) {
   const app = express();
   app.use(morgan('dev'));
 
@@ -13,6 +19,10 @@ export function createApolloServer() {
     context: contextFunction,
     dataSources,
     formatError,
+    introspection: true,
+    engine: {
+      apiKey: credentials.ENGINE_API_KEY,
+    },
   });
   apolloServer.applyMiddleware({ app, cors: true, bodyParserConfig: true });
 
