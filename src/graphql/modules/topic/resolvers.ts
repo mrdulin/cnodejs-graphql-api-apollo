@@ -13,6 +13,14 @@ export const resolvers: IResolvers = {
       return dataSources.cnodeAPI.getCollectedTopics(loginname);
     },
   },
+  Mutation: {
+    async collectTopic(_, { accesstoken, topicId }, { dataSources }: AppContext) {
+      return dataSources.cnodeAPI.collectTopic(accesstoken, topicId);
+    },
+    async deCollectTopic(_, { accesstoken, topicId }, { dataSources }: AppContext) {
+      return dataSources.cnodeAPI.deCollectTopic(accesstoken, topicId);
+    },
+  },
   Topic: {
     async author(parent, _, __) {
       return parent.author;
@@ -21,17 +29,6 @@ export const resolvers: IResolvers = {
   TopicDetail: {
     async author(parent, _, __) {
       return parent.author;
-    },
-  },
-  BaseTopic: {
-    __resolveType(obj, _, __) {
-      if (obj.author_id) {
-        return 'Topic';
-      }
-      if (obj.replies) {
-        return 'TopicDetail';
-      }
-      return null;
     },
   },
 };

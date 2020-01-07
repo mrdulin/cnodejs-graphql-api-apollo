@@ -1,11 +1,14 @@
 import { constructTestServer } from '../../../__utils';
 import { createTestClient } from 'apollo-server-testing';
 import * as Q from './fixtures/queries';
+import * as M from './fixtures/mutations';
 import {
   mockGetTopicsSuccessResponse,
   mockGetTopicByIdSuccessResponse,
   mockGetCollectedTopicsSuccessResponse,
   mockGetCollectedTopicsFailureResponse,
+  mockCollectTopicSuccessResponse,
+  mockDeCollectTopicSuccessResponse,
 } from '../../../../graphql/api/__tests__/fixtures';
 
 describe('topic integration test suites', () => {
@@ -68,6 +71,28 @@ describe('topic integration test suites', () => {
       const res = await query({ query: Q.GET_COLLECTED_TOPICS, variables: { loginname: 'mrdulin' } });
       expect(res).toMatchSnapshot();
       expect(cnodeAPI.getCollectedTopics).toBeCalledWith('mrdulin');
+    });
+  });
+
+  describe('Mutation#collectTopic', () => {
+    it('should collect topic', async () => {
+      const { server, cnodeAPI } = constructTestServer();
+      cnodeAPI.collectTopic = jest.fn().mockResolvedValueOnce(mockCollectTopicSuccessResponse);
+      const { mutate } = createTestClient(server as any);
+      const res = await mutate({ mutation: M.COLLECT_TOPIC, variables: { accesstoken: '123', topicId: '1' } });
+      expect(res).toMatchSnapshot();
+      expect(cnodeAPI.collectTopic).toBeCalledWith('123', '1');
+    });
+  });
+
+  describe('Mutation#deCollectTopic', () => {
+    it('should cancel collect topic', async () => {
+      const { server, cnodeAPI } = constructTestServer();
+      cnodeAPI.deCollectTopic = jest.fn().mockResolvedValueOnce(mockDeCollectTopicSuccessResponse);
+      const { mutate } = createTestClient(server as any);
+      const res = await mutate({ mutation: M.DE_COLLECT_TOPIC, variables: { accesstoken: '123', topicId: '1' } });
+      expect(res).toMatchSnapshot();
+      expect(cnodeAPI.deCollectTopic).toBeCalledWith('123', '1');
     });
   });
 });

@@ -1,5 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`topic integration test suites Mutation#collectTopic should collect topic 1`] = `
+Object {
+  "data": Object {
+    "collectTopic": Object {
+      "success": true,
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`topic integration test suites Mutation#deCollectTopic should cancel collect topic 1`] = `
+Object {
+  "data": Object {
+    "deCollectTopic": Object {
+      "success": true,
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
 exports[`topic integration test suites Query#topic should get topic by id correctly 1`] = `
 Object {
   "data": Object {
