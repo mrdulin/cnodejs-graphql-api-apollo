@@ -19,6 +19,7 @@ jobs:
       script: skip
       deploy:
         provider: gae
+        skip_cleanup: true
         keyfile: '.gcp/gae-svc.json'
         project: '$projectId'
 stages:
