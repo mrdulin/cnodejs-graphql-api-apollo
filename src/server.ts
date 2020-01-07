@@ -12,14 +12,14 @@ interface IApolloServerOptions {
 
 export function createApolloServer({ credentials }: IApolloServerOptions) {
   const app = express();
-  app.use(morgan('dev'));
+  app.use(morgan('dev', { skip: () => process.env.NODE_ENV === 'production' }));
 
   const apolloServer = new ApolloServer({
     schema,
     context: contextFunction,
     dataSources,
     formatError,
-    introspection: true,
+    introspection: process.env.NODE_ENV !== 'production',
     engine: {
       apiKey: credentials.ENGINE_API_KEY,
     },
