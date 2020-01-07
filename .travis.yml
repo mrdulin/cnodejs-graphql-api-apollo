@@ -5,7 +5,7 @@ before_install:
   - mkdir ./.gcp
   - openssl aes-256-cbc -K $encrypted_9623760e394e_key -iv $encrypted_9623760e394e_iv
     -in gae-svc.json.enc -out .gcp/gae-svc.json -d
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version version-number
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.17.3
   - export PATH="$HOME/.yarn/bin:$PATH"
 install:
   - yarn install
