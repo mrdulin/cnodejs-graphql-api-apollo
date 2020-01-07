@@ -22,6 +22,7 @@ jobs:
         skip_cleanup: true
         keyfile: '.gcp/gae-svc.json'
         project: '$projectId'
+        config: app.yaml
 stages:
   - Test
   - Compile
