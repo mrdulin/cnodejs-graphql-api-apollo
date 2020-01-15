@@ -16,7 +16,7 @@ describe('message integration test suites', () => {
   describe('Query#mesasgeCount', () => {
     it('should get message count', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       cnodeAPI.getMessageCount = jest.fn().mockResolvedValueOnce(mockGetMessageCountSuccessResponse.data);
       const res = await query({ query: Q.GET_MESSAGE_COUNT, variables: { accesstoken: '123' } });
       expect(res).toMatchSnapshot();
@@ -25,7 +25,7 @@ describe('message integration test suites', () => {
 
     it('should return error if get message count failure', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       const mError = new Error('some error');
       cnodeAPI.getMessageCount = jest.fn().mockRejectedValueOnce(mError);
       const res = await query({ query: Q.GET_MESSAGE_COUNT, variables: { accesstoken: '123' } });
@@ -37,7 +37,7 @@ describe('message integration test suites', () => {
   describe('Query#messages', () => {
     it('should get messages', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       cnodeAPI.getMessages = jest.fn().mockResolvedValueOnce(mockGetMessagesSuccessResponse.data);
       const res = await query({ query: Q.GET_MESSAGES, variables: { accesstoken: '123' } });
       expect(res).toMatchSnapshot();
@@ -46,7 +46,7 @@ describe('message integration test suites', () => {
 
     it('should return error if get messages failure', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       const mError = new Error('some error');
       cnodeAPI.getMessages = jest.fn().mockRejectedValueOnce(mError);
       const res = await query({ query: Q.GET_MESSAGES, variables: { accesstoken: '123' } });
@@ -56,7 +56,7 @@ describe('message integration test suites', () => {
 
     it('should return accesstoken invalid error if accesstoken is empty string', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       cnodeAPI['get'] = jest.fn();
       const res = await query({ query: Q.GET_MESSAGES, variables: { accesstoken: '' } });
       expect(res).toMatchSnapshot();
@@ -67,7 +67,7 @@ describe('message integration test suites', () => {
   describe('Mutation#markAllMessages', () => {
     it('should mark all message', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { mutate } = createTestClient(server as any);
+      const { mutate } = createTestClient(server);
       cnodeAPI.markAllMessages = jest.fn().mockResolvedValueOnce(mockMarkAllMessagesSuccessResponse.marked_msgs);
       const res = await mutate({ mutation: M.MARK_ALL_MESSAGES, variables: { accesstoken: '123' } });
       expect(res).toMatchSnapshot();
@@ -75,7 +75,7 @@ describe('message integration test suites', () => {
     });
     it('should return error if mark all message failure', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { mutate } = createTestClient(server as any);
+      const { mutate } = createTestClient(server);
       const mError = new Error('some error');
       cnodeAPI.markAllMessages = jest.fn().mockRejectedValueOnce(mError);
       const res = await mutate({ mutation: M.MARK_ALL_MESSAGES, variables: { accesstoken: '123' } });
@@ -87,7 +87,7 @@ describe('message integration test suites', () => {
   describe('Mutation#markOneMessage', () => {
     it('should mark one message', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { mutate } = createTestClient(server as any);
+      const { mutate } = createTestClient(server);
       cnodeAPI.markOneMessage = jest.fn().mockResolvedValueOnce(mockMarkOneMessageSuccessResponse.marked_msg_id);
       const res = await mutate({ mutation: M.MARK_ONE_MESSAGE, variables: { accesstoken: '123', msgId: '1' } });
       expect(res).toMatchSnapshot();
@@ -96,7 +96,7 @@ describe('message integration test suites', () => {
 
     it('should return error if mark one message failure', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { mutate } = createTestClient(server as any);
+      const { mutate } = createTestClient(server);
       const mError = new Error('some error');
       cnodeAPI.markOneMessage = jest.fn().mockRejectedValueOnce(mError);
       const res = await mutate({ mutation: M.MARK_ONE_MESSAGE, variables: { accesstoken: '123', msgId: '1' } });

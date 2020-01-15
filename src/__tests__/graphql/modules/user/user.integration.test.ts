@@ -13,7 +13,7 @@ describe('user integration test suites', () => {
   describe('Query#user', () => {
     it('should get user by loginname', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       cnodeAPI.getUser = jest.fn().mockResolvedValueOnce(mockGetUserSuccessResponse.data);
       const res = await query({ query: Q.GET_USER_BY_LOGINNAME, variables: { loginname: 'mrdulin' } });
       expect(res).toMatchSnapshot();
@@ -22,7 +22,7 @@ describe('user integration test suites', () => {
 
     it('should return errors if get user failure', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       const mError = new Error('some error');
       cnodeAPI.getUser = jest.fn().mockRejectedValueOnce(mError);
       const res = await query({ query: Q.GET_USER_BY_LOGINNAME, variables: { loginname: 'mrdulin' } });
@@ -32,7 +32,7 @@ describe('user integration test suites', () => {
 
     it('should get partial user info', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       cnodeAPI.getUser = jest.fn().mockResolvedValueOnce(mockGetUserSuccessResponse.data);
       const res = await query({ query: Q.GET_USER_BY_LOGINNAME_PARTIAL, variables: { loginname: 'mrdulin' } });
       expect(res).toMatchSnapshot();
@@ -41,14 +41,14 @@ describe('user integration test suites', () => {
 
     it('should throw error if no loginname parameter passed in', async () => {
       const { server } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       const res = await query({ query: Q.GET_USER_BY_LOGINNAME_PARTIAL });
       expect(res).toMatchSnapshot();
     });
 
     it('should return an default user if loginname is empty string', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       expect(jest.isMockFunction(cnodeAPI.getUser)).toBeFalsy();
       cnodeAPI['get'] = jest.fn().mockResolvedValueOnce(mockGetUserSuccessResponse);
       const res = await query({ query: Q.GET_USER_BY_LOGINNAME_PARTIAL, variables: { loginname: '' } });
@@ -60,7 +60,7 @@ describe('user integration test suites', () => {
   describe('Query#accesstoken', () => {
     it('should validate access token correctly', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       cnodeAPI.validateAccessToken = jest.fn().mockResolvedValueOnce(mockValidateAccessTokenSuccessResponse);
       const res = await query({ query: Q.VALIDATE_ACCESS_TOKEN, variables: { accesstoken: '123' } });
       expect(res).toMatchSnapshot();
@@ -68,7 +68,7 @@ describe('user integration test suites', () => {
 
     it('should return error if validate access token failure', async () => {
       const { server, cnodeAPI } = constructTestServer();
-      const { query } = createTestClient(server as any);
+      const { query } = createTestClient(server);
       const mError = new Error('some error');
       cnodeAPI.validateAccessToken = jest.fn().mockRejectedValueOnce(mError);
       const res = await query({ query: Q.VALIDATE_ACCESS_TOKEN, variables: { accesstoken: '123' } });
