@@ -36,7 +36,7 @@
   "license": "MIT",
   "dependencies": {
     "apollo-datasource-rest": "^0.6.11",
-    "apollo-server": "^2.9.16",
+    "apollo-server": "^2.14.2",
     "apollo-server-express": "^2.9.16",
     "apollo-server-testing": "^2.9.16",
     "apollo-upload-server": "^7.1.0",
